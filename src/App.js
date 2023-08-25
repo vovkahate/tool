@@ -33,6 +33,7 @@ function App() {
 
     return (
         <div className={styles.App}>
+            {isLoading && <p>Loading...</p>}
             <div className={styles.wrapper}>
                 <Logo />
                 <p>
