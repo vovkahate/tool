@@ -1,17 +1,21 @@
-import Filters from './components/filters/filters';
-import Logo from './components/logo/logo';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './app.module.scss';
-import { useDispatch } from 'react-redux';
+import { Spin } from 'antd';
+
+import Logo from './components/logo/logo';
+import Filters from './components/filters/filters';
+import Routes from './components/flightRoutes/routes';
+import TicketsList from './components/ticketsList/ticketsList';
+
 import { getId } from './store/idSlice';
 import { getTickets } from './store/ticketsSlice';
-import Routes from './components/flightRoutes/routes';
-import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 
 function App() {
     const dispatch = useDispatch();
 
     const { id, isLoading, error } = useSelector((state) => state.id);
+    const { tickets, stop } = useSelector((state) => state.tickets);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -33,7 +37,7 @@ function App() {
 
     return (
         <div className={styles.App}>
-            {isLoading && <p>Loading...</p>}
+            {isLoading && <Spin />}
             <div className={styles.wrapper}>
                 <Logo />
                 <p>
@@ -43,6 +47,8 @@ function App() {
                     <Filters />
                     <div>
                         <Routes />
+                        {!stop && <Spin />}
+                        <TicketsList />
                     </div>
                 </div>
             </div>

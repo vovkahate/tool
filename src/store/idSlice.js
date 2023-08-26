@@ -3,24 +3,17 @@ import axios from 'axios';
 
 const initialState = {
     id: '',
-    isLoading: false,
+    isLoading: true,
     error: '',
 };
 
 export const getId = createAsyncThunk(
     'id/getSearchId',
     async (_, { rejectWithValue, dispatch }) => {
-        dispatch(setLoading(true));
-        try {
-            const response = await axios.get(
-                'https://aviasales-test-api.kata.academy/search'
-            );
-            dispatch(setSearchId(response.data));
-        } catch (error) {
-            dispatch(setError(error.message));
-        } finally {
-            dispatch(setLoading(false));
-        }
+        const response = await axios.get(
+            'https://aviasales-test-api.kata.academy/search'
+        );
+        dispatch(setSearchId(response.data));
     }
 );
 
@@ -32,23 +25,20 @@ export const idSlice = createSlice({
             state.id = action.payload.searchId;
             console.log('id:', state.id);
         },
-        setLoading: (state, action) => {
-            state.isLoading = action.payload;
-        },
-        setError: (state, action) => {
-            state.error = action.payload;
-        },
     },
     extraReducers: (builder) => {
         builder
             .addCase(getId.fulfilled, (state) => {
                 console.log('fulfilled id');
+                state.isLoading = false;
             })
-            .addCase(getId.rejected, () => {
+            .addCase(getId.rejected, (state, action) => {
                 console.log('rejected id');
+                state.error = action.payload;
             })
-            .addCase(getId.pending, () => {
+            .addCase(getId.pending, (state, action) => {
                 console.log('pending id');
+                state.isLoading = true;
             });
     },
 });
