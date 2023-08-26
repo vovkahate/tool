@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './app.module.scss';
 import { Spin } from 'antd';
 
+import _ from 'lodash';
+
 import Logo from './components/logo/logo';
 import Filters from './components/filters/filters';
 import Routes from './components/flightRoutes/routes';
@@ -15,7 +17,7 @@ function App() {
     const dispatch = useDispatch();
 
     const { id, isLoading, error } = useSelector((state) => state.id);
-    const { tickets, stop } = useSelector((state) => state.tickets);
+    const { stop } = useSelector((state) => state.tickets);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -31,7 +33,6 @@ function App() {
                 const fetchTickets = await dispatch(getTickets(id));
             }
         };
-
         fetchData();
     }, [id]);
 
@@ -45,7 +46,7 @@ function App() {
                 </p>
                 <div className={styles.main}>
                     <Filters />
-                    <div>
+                    <div className={styles.right}>
                         <Routes />
                         {!stop && <Spin />}
                         <TicketsList />

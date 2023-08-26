@@ -1,36 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Radio } from 'antd';
 
-const optionsButtons = [
-    {
-        label: 'Самый дешевый',
-        value: 'Apple',
-    },
-    {
-        label: 'Самый быстрый',
-        value: 'Pear',
-    },
-    {
-        label: 'Оптимальный',
-        value: 'Orange',
-    },
-];
 const Routes = () => {
-    const [value, setValue] = useState('Apple');
-    const onChange = ({ target: { value } }) => {
-        console.log('radio checked', value);
-        setValue(value);
-    };
     return (
         <>
             <Radio.Group
-                options={optionsButtons}
-                onChange={onChange}
-                value={value}
-                optionType="button"
+                defaultValue="a"
                 buttonStyle="solid"
                 size="large"
-            />
+            >
+                <Radio.Button value="a">Самый дешевый</Radio.Button>
+                <Radio.Button value="b">Самый быстрый</Radio.Button>
+                <Radio.Button
+                    value="c"
+                    disabled
+                >
+                    Оптимальный
+                </Radio.Button>
+            </Radio.Group>
         </>
     );
 };

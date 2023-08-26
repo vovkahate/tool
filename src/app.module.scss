@@ -18,3 +18,13 @@
     display: flex;
     flex-direction: row;
 }
+
+.right {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid green;
+    width: 500px;
+    margin-left: 20px;
+}
