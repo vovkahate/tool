@@ -1,15 +1,139 @@
 import React from 'react';
 import styles from './ticketBody.module.scss';
+import S7 from '../../pics/S7.avif';
+import AK from '../../pics/AK.avif';
+import BT from '../../pics/BT.avif';
+import DP from '../../pics/DP.avif';
+import FV from '../../pics/FV.avif';
+import U6 from '../../pics/U6.avif';
+import UT from '../../pics/UT.avif';
+import W6 from '../../pics/W6.avif';
+const getStops = (stops) => {
+    if (stops === 0) {
+        return 'Без пересадок';
+    } else if (stops === 1) {
+        return '1 пересадка';
+    } else if (stops === 2) {
+        return '2 пересадки';
+    } else if (stops === 3) {
+        return '3 пересадки';
+    }
+};
 
-const TicketBody = ({ id, carrier, price }) => {
+const formatDate = (timestamp, minutes) => {
+    const date = new Date(timestamp);
+    const hours = date.getHours();
+    const currentMinutes = date.getMinutes();
+
+    const formattedDate = `${hours.toString().padStart(2, '0')}:${currentMinutes
+        .toString()
+        .padStart(2, '0')}`;
+
+    const updatedDate = new Date(date.getTime() + minutes * 60000);
+    const updatedHours = updatedDate.getHours();
+    const updatedMinutes = updatedDate.getMinutes();
+    const formattedUpdatedDate = `${updatedHours
+        .toString()
+        .padStart(2, '0')}:${updatedMinutes.toString().padStart(2, '0')}`;
+
+    return `${formattedDate} - ${formattedUpdatedDate}`;
+};
+
+const formatMinutes = (minutes) => {
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+    const formattedTime = `${hours
+        .toString()
+        .padStart(2, '0')}ч ${remainingMinutes.toString().padStart(2, '0')}м`;
+    return formattedTime;
+};
+
+function insertImage(key) {
+    if (key === 'S7') {
+        return S7;
+    } else if (key === 'AK') {
+        return AK;
+    } else if (key === 'BT') {
+        return BT;
+    } else if (key === 'DP') {
+        return DP;
+    } else if (key === 'FV') {
+        return FV;
+    } else if (key === 'U6') {
+        return U6;
+    } else if (key === 'UT') {
+        return UT;
+    } else if (key === 'W6') {
+        return W6;
+    }
+}
+
+function formatPrice(price) {
+    // Преобразование числа в строку и замена точки на запятую (если необходимо)
+    const priceString = price.toString().replace('.', ',');
+
+    // Разделение строки на массив по разделителю (запятая)
+    const parts = priceString.split(',');
+
+    // Получение целой части числа
+    const integerPart = parts[0];
+
+    // Добавление пробелов между тысячами (каждые 3 символа справа)
+    const formattedIntegerPart = integerPart.replace(
+        /\B(?=(\d{3})+(?!\d))/g,
+        ' '
+    );
+
+    // Формирование окончательной строки с целой частью и десятичной частью (если есть)
+    let formattedPrice = formattedIntegerPart;
+    if (parts.length > 1) {
+        const decimalPart = parts[1];
+        formattedPrice += `,${decimalPart}`;
+    }
+
+    return formattedPrice;
+}
+const TicketBody = ({ id, carrier, price, segments }) => {
     return (
-        <div className={styles.wrapper}>
-            <div className={styles.top}>
-                <div>{price}</div>
-                <div>{carrier}</div>
+        <div className={styles.parent}>
+            <div className={styles.price}>{formatPrice(price)} Р</div>
+            <div
+                id="image"
+                className={styles.carrier}
+            >
+                <img
+                    src={insertImage(carrier)}
+                    alt="carrier"
+                />
             </div>
-            <div className={styles.body}>туда</div>
-            <div className={styles.bottom}>обратно</div>
+            <div className={styles.grey}>
+                {segments[0].origin} - {segments[0].destination}
+            </div>
+            <div className={styles.grey}>в пути</div>
+            <div className={styles.grey}>
+                {getStops(segments[0].stops.length)}
+            </div>
+            <div className={styles.black}>
+                {formatDate(segments[0].date, segments[0].duration)}
+            </div>
+            <div className={styles.black}>
+                {formatMinutes(segments[0].duration)}
+            </div>
+            <div className={styles.black}>{segments[0].stops.toString()}</div>
+            <div className={styles.grey}>
+                {segments[1].origin} - {segments[1].destination}
+            </div>
+            <div className={styles.grey}>в пути</div>
+            <div className={styles.grey}>
+                {getStops(segments[1].stops.length)}
+            </div>
+            <div className={styles.black}>
+                {formatDate(segments[1].date, segments[1].duration)}
+            </div>
+            <div className={styles.black}>
+                {formatMinutes(segments[1].duration)}
+            </div>
+            <div className={styles.black}>{segments[1].stops.toString()}</div>
         </div>
     );
 };

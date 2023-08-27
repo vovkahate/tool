@@ -13,10 +13,11 @@
 }
 
 .main {
-    margin-top: 40px;
-    border: 1px solid grey;
+    margin-top: 30px;
+
     display: flex;
     flex-direction: row;
+    justify-content: center;
 }
 
 .right {
@@ -24,7 +25,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    border: 1px solid green;
+
     width: 500px;
-    margin-left: 20px;
+    margin-left: 10px;
 }

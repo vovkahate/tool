@@ -1,13 +1,54 @@
-.wrapper {
-    box-sizing: border-box;
-    width: 480px;
-    border: 1px solid grey;
-    margin-bottom: 5px;
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;600&display=swap');
+
+.price {
+    color: #2196f3;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    line-height: 24px;
+    align-self: flex-start;
 }
 
-.top {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.parent {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 55px 18px 18px 30px 18px;
+    grid-column-gap: 5px;
+    font-weight: 500;
+    width: 480px;
+    height: 180px;
+    font-family: 'Open Sans', sans-serif;
+    margin-bottom: 15px;
+    background: #fff;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    border-radius: 5px;
+    padding: 20px;
     align-items: center;
+}
+
+.carrier {
+    grid-column: 3;
+    align-self: flex-start;
+}
+
+.grey {
+    color: #a0b0b9;
+    font-family: Open Sans;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 18px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    align-self: flex-end;
+}
+
+.black {
+    color: #4a4a4a;
+    font-family: Open Sans;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 21px;
 }

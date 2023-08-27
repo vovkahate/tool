@@ -1,10 +1,13 @@
 import React from 'react';
-import { Radio } from 'antd';
+import { Button, Radio } from 'antd';
+import styles from './buttongroup.module.scss';
+import './q.css';
 
 const Routes = () => {
     return (
         <>
             <Radio.Group
+                className="custom-button-group"
                 defaultValue="a"
                 buttonStyle="solid"
                 size="large"

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Checkbox } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './filters.module.scss';
+
 import {
     setAll,
     setWithout,
@@ -20,6 +21,7 @@ const Filters = () => {
     ];
 
     const dispatch = useDispatch();
+
     const checkedList = useSelector((state) => {
         const { all, without, one, two, three } = state.filter;
         if (all) return options;
