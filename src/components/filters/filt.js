@@ -83,7 +83,10 @@ const Filt = () => {
             </div>
 
             {options.map((option, index) => (
-                <div className="checkbox-wrapper-42">
+                <div
+                    className="checkbox-wrapper-42"
+                    key={index}
+                >
                     <input
                         id={index}
                         type="checkbox"

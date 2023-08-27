@@ -49,7 +49,7 @@ export const getTickets = createAsyncThunk(
                 dispatch(setTickets(data));
                 await new Promise((resolve) => setTimeout(resolve, 1000));
             } catch (error) {
-                console.log('error', error);
+                //console.log('error', error);
             }
         }
     }

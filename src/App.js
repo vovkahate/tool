@@ -46,6 +46,7 @@ function App() {
                     <Filt />
                     <div className={styles.right}>
                         <Routes />
+
                         {!stop && <Loader />}
 
                         <TicketsList />

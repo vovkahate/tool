@@ -119,7 +119,11 @@ const TicketBody = ({ id, carrier, price, segments }) => {
             <div className={styles.black}>
                 {formatMinutes(segments[0].duration)}
             </div>
-            <div className={styles.black}>{segments[0].stops.toString()}</div>
+            <div className={styles.black}>
+                {segments[0].stops.length > 0
+                    ? segments[0].stops.toString()
+                    : '-'}
+            </div>
             <div className={styles.grey}>
                 {segments[1].origin} - {segments[1].destination}
             </div>
@@ -133,7 +137,11 @@ const TicketBody = ({ id, carrier, price, segments }) => {
             <div className={styles.black}>
                 {formatMinutes(segments[1].duration)}
             </div>
-            <div className={styles.black}>{segments[1].stops.toString()}</div>
+            <div className={styles.black}>
+                {segments[1].stops.length > 0
+                    ? segments[1].stops.toString()
+                    : '-'}
+            </div>
         </div>
     );
 };

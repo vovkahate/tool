@@ -29,15 +29,14 @@ export const idSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(getId.fulfilled, (state) => {
-                console.log('fulfilled id');
                 state.isLoading = false;
             })
             .addCase(getId.rejected, (state, action) => {
-                console.log('rejected id');
+                console.log('запрос id не удался');
                 state.error = action.payload;
             })
             .addCase(getId.pending, (state, action) => {
-                console.log('pending id');
+                console.log('запрос id');
                 state.isLoading = true;
             });
     },
