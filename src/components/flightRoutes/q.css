@@ -1,18 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;500;600&display=swap');
+
 .ant-radio-group {
     padding: 0;
     margin-bottom: 7px;
-    color: #4a4a4a;
-    text-align: center;
-    font-family: Open Sans;
-    font-size: 12px;
-    font-weight: 400;
-
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
 }
 
 .ant-radio-button-wrapper {
-    padding: 8px 20px; /* Задайте желаемое значение вертикального и горизонтального паддинга */
+    padding: 8px 19px; /* Задайте желаемое значение вертикального и горизонтального паддинга */
 }
 
 .ant-radio-button-wrapper.ant-radio-button-wrapper-checked:not(
@@ -25,4 +19,13 @@
 
 .custom-button-group .ant-radio-button-wrapper {
     height: 55px; /* Задайте желаемую высоту кнопок */
+
+    color: #4a4a4a;
+    text-align: center;
+    font-family: Open Sans;
+    font-size: 13px;
+    font-weight: 500;
+
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
 }

@@ -11,6 +11,8 @@ import TicketsList from './components/ticketsList/ticketsList';
 import { getId } from './store/idSlice';
 import { getTickets } from './store/ticketsSlice';
 
+import Loader from './components/loader/loader';
+
 function App() {
     const dispatch = useDispatch();
 
@@ -38,13 +40,14 @@ function App() {
         <div className={styles.App}>
             <div className={styles.wrapper}>
                 <Logo />
-                {isLoading && <Spin />}
+                {/* {isLoading && <Spin />} */}
 
                 <div className={styles.main}>
                     <Filt />
                     <div className={styles.right}>
                         <Routes />
-                        {!stop && <Spin />}
+                        {!stop && <Loader />}
+
                         <TicketsList />
                     </div>
                 </div>
