@@ -74,32 +74,32 @@ const TicketsList = () => {
     );
     const tickets = useSelector(ticketsSelector);
 
-    // const tickets = useSelector((state) => {
-    //     const { all, without, one, two, three } = filters;
-    //     let filteredTickets = [];
-
-    //     if (all) {
-    //         filteredTickets.push(...state.tickets.all);
-    //         return filteredTickets;
-    //     }
-    //     if (without) {
-    //         filteredTickets.push(...state.tickets[0]);
-    //     }
-    //     if (one) {
-    //         filteredTickets.push(...state.tickets[1]);
-    //     }
-    //     if (two) {
-    //         filteredTickets.push(...state.tickets[2]);
-    //     }
-    //     if (three) {
-    //         filteredTickets.push(...state.tickets[3]);
-    //     }
-
-    //     return filteredTickets;
-    // });
+    const { cheapest, fastest } = useSelector((state) => state.options);
 
     const newTickets = useMemo(() => {
-        const sortedTickets = tickets.slice().sort((a, b) => a.price - b.price);
+        const sortedTickets = [];
+        if (cheapest) {
+            sortedTickets.push(
+                ...tickets.slice().sort((a, b) => a.price - b.price)
+            );
+        } else if (fastest) {
+            sortedTickets.push(
+                ...tickets
+                    .slice()
+                    .sort(
+                        (a, b) =>
+                            Math.min(
+                                a.segments[0].duration,
+                                a.segments[1].duration
+                            ) -
+                            Math.min(
+                                b.segments[0].duration,
+                                b.segments[1].duration
+                            )
+                    )
+            );
+        }
+
         const removedDuplicates = Array.from(new Set(sortedTickets));
         return removedDuplicates;
     }, [tickets]);
