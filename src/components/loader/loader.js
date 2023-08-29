@@ -1,10 +1,10 @@
 import React from 'react';
-import './loader.css';
+import styles from './loader.module.scss';
 
 const Loader = () => {
     return (
-        <div className="loader">
-            <span className="load"></span>
+        <div className={styles.loader}>
+            <span className={styles.load}></span>
         </div>
     );
 };

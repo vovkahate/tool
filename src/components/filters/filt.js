@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import './f.css';
 import styles from './filters.module.scss';
 
 import {
@@ -35,35 +34,41 @@ const Filt = () => {
 
     const checkAll = options.length === checkedList.length;
 
-    const handleCheckboxChange = (option) => {
-        let updatedList;
-        if (checkedList.includes(option)) {
-            updatedList = checkedList.filter((item) => item !== option);
-        } else {
-            updatedList = [...checkedList, option];
-        }
+    const handleCheckboxChange = useCallback(
+        (option) => {
+            let updatedList;
+            if (checkedList.includes(option)) {
+                updatedList = checkedList.filter((item) => item !== option);
+            } else {
+                updatedList = [...checkedList, option];
+            }
 
-        dispatch(setAll(updatedList.length === options.length));
-        dispatch(setWithout(updatedList.includes('Без пересадок')));
-        dispatch(setOne(updatedList.includes('1 пересадка')));
-        dispatch(setTwo(updatedList.includes('2 пересадки')));
-        dispatch(setThree(updatedList.includes('3 пересадки')));
-    };
+            dispatch(setAll(updatedList.length === options.length));
+            dispatch(setWithout(updatedList.includes('Без пересадок')));
+            dispatch(setOne(updatedList.includes('1 пересадка')));
+            dispatch(setTwo(updatedList.includes('2 пересадки')));
+            dispatch(setThree(updatedList.includes('3 пересадки')));
+        },
+        [checkedList]
+    );
 
-    const handleCheckAllChange = (event) => {
-        const isChecked = event.target.checked;
+    const handleCheckAllChange = useCallback(
+        (event) => {
+            const isChecked = event.target.checked;
 
-        dispatch(setAll(isChecked));
-        dispatch(setWithout(isChecked));
-        dispatch(setOne(isChecked));
-        dispatch(setTwo(isChecked));
-        dispatch(setThree(isChecked));
-    };
+            dispatch(setAll(isChecked));
+            dispatch(setWithout(isChecked));
+            dispatch(setOne(isChecked));
+            dispatch(setTwo(isChecked));
+            dispatch(setThree(isChecked));
+        },
+        [dispatch]
+    );
 
     return (
         <div className={styles.wrapper}>
             <h3 className={styles.title}>КОЛИЧЕСТВО ПЕРЕСАДОК</h3>
-            <div className="checkbox-wrapper-42">
+            <div className={styles.checkbox_wrapper_42}>
                 <input
                     id="all"
                     type="checkbox"
@@ -71,11 +76,11 @@ const Filt = () => {
                     onChange={handleCheckAllChange}
                 />
                 <label
-                    className="cbx"
+                    className={styles.cbx}
                     htmlFor="all"
                 ></label>
                 <label
-                    className="lbl"
+                    className={styles.lbl}
                     htmlFor="all"
                 >
                     Все
@@ -84,7 +89,7 @@ const Filt = () => {
 
             {options.map((option, index) => (
                 <div
-                    className="checkbox-wrapper-42"
+                    className={styles.checkbox_wrapper_42}
                     key={index}
                 >
                     <input
@@ -94,11 +99,11 @@ const Filt = () => {
                         onChange={() => handleCheckboxChange(option)}
                     />
                     <label
-                        className="cbx"
+                        className={styles.cbx}
                         htmlFor={index}
                     ></label>
                     <label
-                        className="lbl"
+                        className={styles.lbl}
                         htmlFor={index}
                     >
                         {option}

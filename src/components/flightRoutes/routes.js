@@ -1,8 +1,8 @@
 import React from 'react';
 import { Radio } from 'antd';
-import styles from './buttongroup.module.scss';
+
 import './q.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setCheapest, setFastest } from '../../store/optionSlice';
 
 const Routes = () => {
@@ -19,19 +19,10 @@ const Routes = () => {
                 defaultValue="a"
                 buttonStyle="solid"
                 size="large"
+                onChange={handleOptionsChange}
             >
-                <Radio.Button
-                    value="a"
-                    onChange={handleOptionsChange}
-                >
-                    Самый дешевый
-                </Radio.Button>
-                <Radio.Button
-                    value="b"
-                    onChange={handleOptionsChange}
-                >
-                    Самый быстрый
-                </Radio.Button>
+                <Radio.Button value="a">Самый дешевый</Radio.Button>
+                <Radio.Button value="b">Самый быстрый</Radio.Button>
                 <Radio.Button
                     value="c"
                     disabled

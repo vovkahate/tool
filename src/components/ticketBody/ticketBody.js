@@ -8,17 +8,28 @@ import FV from '../../pics/FV.avif';
 import U6 from '../../pics/U6.avif';
 import UT from '../../pics/UT.avif';
 import W6 from '../../pics/W6.avif';
-const getStops = (stops) => {
-    if (stops === 0) {
-        return 'Без пересадок';
-    } else if (stops === 1) {
-        return '1 пересадка';
-    } else if (stops === 2) {
-        return '2 пересадки';
-    } else if (stops === 3) {
-        return '3 пересадки';
+
+const MemoizedImage = React.memo(({ carrier }) => (
+    <img
+        src={insertImage(carrier)}
+        alt="carrier"
+    />
+));
+
+function getStops(stops) {
+    switch (stops) {
+        case 0:
+            return 'Без пересадок';
+        case 1:
+            return '1 пересадка';
+        case 2:
+            return '2 пересадки';
+        case 3:
+            return '3 пересадки';
+        default:
+            return '';
     }
-};
+}
 
 const formatDate = (timestamp, minutes) => {
     const date = new Date(timestamp);
@@ -49,22 +60,25 @@ const formatMinutes = (minutes) => {
 };
 
 function insertImage(key) {
-    if (key === 'S7') {
-        return S7;
-    } else if (key === 'AK') {
-        return AK;
-    } else if (key === 'BT') {
-        return BT;
-    } else if (key === 'DP') {
-        return DP;
-    } else if (key === 'FV') {
-        return FV;
-    } else if (key === 'U6') {
-        return U6;
-    } else if (key === 'UT') {
-        return UT;
-    } else if (key === 'W6') {
-        return W6;
+    switch (key) {
+        case 'S7':
+            return S7;
+        case 'AK':
+            return AK;
+        case 'BT':
+            return BT;
+        case 'DP':
+            return DP;
+        case 'FV':
+            return FV;
+        case 'U6':
+            return U6;
+        case 'UT':
+            return UT;
+        case 'W6':
+            return W6;
+        default:
+            return null;
     }
 }
 
@@ -101,10 +115,7 @@ const TicketBody = ({ id, carrier, price, segments }) => {
                 id="image"
                 className={styles.carrier}
             >
-                <img
-                    src={insertImage(carrier)}
-                    alt="carrier"
-                />
+                <MemoizedImage carrier={carrier} />
             </div>
             <div className={styles.grey}>
                 {segments[0].origin} - {segments[0].destination}

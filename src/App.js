@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './app.module.scss';
-import { Spin } from 'antd';
 
 import Logo from './components/logo/logo';
 import Filt from './components/filters/filt';
@@ -40,15 +39,11 @@ function App() {
         <div className={styles.App}>
             <div className={styles.wrapper}>
                 <Logo />
-                {/* {isLoading && <Spin />} */}
-
                 <div className={styles.main}>
                     <Filt />
                     <div className={styles.right}>
                         <Routes />
-
                         {!stop && <Loader />}
-
                         <TicketsList />
                     </div>
                 </div>

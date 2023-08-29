@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useMemo, useCallback, memo } from 'react';
 import TicketBody from '../ticketBody/ticketBody';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Button, Alert } from 'antd';
 import debounce from 'lodash/debounce';
 import { animateScroll as scroll } from 'react-scroll';
-import './b.css';
+import styles from './ticketList.module.scss';
 import { createSelector } from 'reselect';
 import { v4 } from 'uuid';
 
@@ -136,7 +136,7 @@ const TicketsList = () => {
             )}
             {showScrollButton && (
                 <Button
-                    className="scroll-button"
+                    className={styles.scroll_button}
                     size="small"
                     onClick={() => scroll.scrollToTop()}
                 >
